@@ -8,7 +8,9 @@ from loguru import logger
 @click.argument('path_to_model', default='./models/logreg.pickle')
 @click.argument('path_to_test', default='./data/test.csv')
 @click.argument('path_to_output', default='./data/prediction.csv')
-def predict_data(path_to_model: str, path_to_test, path_to_output: str) -> None:
+def predict_data(path_to_model: str = './models/logreg.pickle',
+                 path_to_test: str = './data/test.csv',
+                 path_to_output: str = './data/prediction.csv') -> None:
     """functions loads model from path_to_model, then predicts condition using data and outputs
     to path_to_output"""
     test = pd.read_csv(path_to_test)
