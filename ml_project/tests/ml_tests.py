@@ -1,13 +1,15 @@
 import os
+from pathlib import Path
+import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import f1_score, accuracy_score
-import numpy as np
-import pickle
+from sklearn.metrics import f1_score
+import yaml
 from loguru import logger
 from generate_data import generate_test_data
 from train_model import prepare_data
 
+PATH_TO_CONFIGS = Path('../configs/configs.yml')
 
 def test_generated_data_train():
     path_to_train_data = '/Users/boringeugene/Git/ml_project/evgeny-sharov/ml_project/data/heart_cleveland_upload.csv'
@@ -20,12 +22,9 @@ def test_generated_data_train():
     X_train = train.drop(['condition'], axis=1)
     y_train = train['condition']
 
-    parameter_grid = [
-        {'penalty': ['l2', 'l1'], 'C': np.arange(0.1, 1, 0.01),
-         'solver': ['saga'], 'max_iter': [1000]},
-        {'penalty': ['elasticnet'], 'l1_ratio': np.arange(0, 1, 0.01),
-         'solver': ['saga'], 'max_iter': [1000]}
-    ]
+    with open(PATH_TO_CONFIGS, 'r') as config_file:
+        configs = yaml.safe_load(config_file)
+    parameter_grid = configs['parameter_grid']
 
     model = LogisticRegression()
     grid_model = GridSearchCV(model, parameter_grid, refit=True)

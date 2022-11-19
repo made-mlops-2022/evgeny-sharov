@@ -1,17 +1,18 @@
 """this module provides tools to train model"""
 
 import os
+from pathlib import Path
 import pickle
 import pandas as pd
-import numpy as np
 import click
+import yaml
 from loguru import logger
 from sklearn.preprocessing import Normalizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV, train_test_split
 
 RANDOM_STATE = 42
-
+PATH_TO_CONFIGS = Path('configs/configs.yml')
 
 def prepare_data(path: str) -> pd.DataFrame:
     """this function prepares data and creates normalizer.
@@ -59,12 +60,9 @@ def train_model(path_to_data: str, path_to_model: str = 'models/logreg.pickle') 
     X_train = train.drop(['condition'], axis=1)
     y_train = train['condition']
 
-    parameter_grid = [
-        {'penalty': ['l2', 'l1'], 'C': np.arange(0.1, 1, 0.01),
-         'solver': ['saga'], 'max_iter': [1000]},
-        {'penalty': ['elasticnet'], 'l1_ratio': np.arange(0, 1, 0.01),
-         'solver': ['saga'], 'max_iter': [1000]}
-    ]
+    with open(PATH_TO_CONFIGS, 'r') as config_file:
+        configs = yaml.safe_load(config_file)
+    parameter_grid = configs['parameter_grid']
 
     model = LogisticRegression()
     grid_model = GridSearchCV(model, parameter_grid, refit=True)
