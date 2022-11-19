@@ -67,7 +67,7 @@ def train_model(path_to_data: str, path_to_model: str = 'models/logreg.pickle') 
     ]
 
     model = LogisticRegression()
-    grid_model = GridSearchCV(model, parameter_grid)
+    grid_model = GridSearchCV(model, parameter_grid, refit=True)
     logger.info("Model started training")
     grid_model.fit(X_train, y_train)
     logger.info("Model trained")

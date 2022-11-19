@@ -1,7 +1,7 @@
 import os
-import pytest
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import f1_score, accuracy_score
 import numpy as np
 import pickle
 from loguru import logger
@@ -28,7 +28,7 @@ def test_generated_data_train():
     ]
 
     model = LogisticRegression()
-    grid_model = GridSearchCV(model, parameter_grid)
+    grid_model = GridSearchCV(model, parameter_grid, refit=True)
     logger.info("Model started training")
     grid_model.fit(X_train, y_train)
     logger.info("Model trained")
@@ -37,5 +37,9 @@ def test_generated_data_train():
         pickle.dump(grid_model.best_estimator_, file)
         logger.info(f"Model dumped to {path_to_model}")
 
+    # fit baseline model and check whether our model is better
+    model.fit(X_train, y_train)
+    baseline_f1_score = f1_score(y_train, model.predict(X_train))
+    assert baseline_f1_score <= f1_score(y_train, grid_model.best_estimator_.predict(X_train))
     assert 'logreg.pickle' in os.listdir('.')
     assert 'generated_data.csv' in os.listdir('.')
