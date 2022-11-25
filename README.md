@@ -19,3 +19,6 @@ Run prediction script with
 ```
 python3 predict.py './models/logreg.pickle' './data/test.csv' './data/prediction.csv'
 ```
+
+## REST server for inference prediction
+Check directory online_inference
