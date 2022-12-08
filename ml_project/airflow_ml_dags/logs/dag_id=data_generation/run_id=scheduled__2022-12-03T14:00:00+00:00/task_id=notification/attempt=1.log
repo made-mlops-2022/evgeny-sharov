@@ -1,0 +1,28 @@
+[2022-12-04T16:13:07.017+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: data_generation.notification scheduled__2022-12-03T14:00:00+00:00 [queued]>
+[2022-12-04T16:13:07.024+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: data_generation.notification scheduled__2022-12-03T14:00:00+00:00 [queued]>
+[2022-12-04T16:13:07.025+0000] {taskinstance.py:1283} INFO - 
+--------------------------------------------------------------------------------
+[2022-12-04T16:13:07.027+0000] {taskinstance.py:1284} INFO - Starting attempt 1 of 1
+[2022-12-04T16:13:07.033+0000] {taskinstance.py:1285} INFO - 
+--------------------------------------------------------------------------------
+[2022-12-04T16:13:07.044+0000] {taskinstance.py:1304} INFO - Executing <Task(BashOperator): notification> on 2022-12-03 14:00:00+00:00
+[2022-12-04T16:13:07.051+0000] {standard_task_runner.py:55} INFO - Started process 339 to run task
+[2022-12-04T16:13:07.056+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'data_generation', 'notification', 'scheduled__2022-12-03T14:00:00+00:00', '--job-id', '32', '--raw', '--subdir', 'DAGS_FOLDER/generate_data.py', '--cfg-path', '/tmp/tmpua_ltz34']
+[2022-12-04T16:13:07.059+0000] {standard_task_runner.py:83} INFO - Job 32: Subtask notification
+[2022-12-04T16:13:07.131+0000] {task_command.py:389} INFO - Running <TaskInstance: data_generation.notification scheduled__2022-12-03T14:00:00+00:00 [running]> on host c7dedbf79ea9
+[2022-12-04T16:13:07.185+0000] {taskinstance.py:1513} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=data_generation
+AIRFLOW_CTX_TASK_ID=notification
+AIRFLOW_CTX_EXECUTION_DATE=2022-12-03T14:00:00+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-12-03T14:00:00+00:00
+[2022-12-04T16:13:07.187+0000] {subprocess.py:63} INFO - Tmp dir root location: 
+ /tmp
+[2022-12-04T16:13:07.189+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'echo received data at 2022-12-03']
+[2022-12-04T16:13:07.205+0000] {subprocess.py:86} INFO - Output:
+[2022-12-04T16:13:07.208+0000] {subprocess.py:93} INFO - received data at 2022-12-03
+[2022-12-04T16:13:07.210+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2022-12-04T16:13:07.234+0000] {taskinstance.py:1327} INFO - Marking task as SUCCESS. dag_id=data_generation, task_id=notification, execution_date=20221203T140000, start_date=20221204T161307, end_date=20221204T161307
+[2022-12-04T16:13:07.268+0000] {local_task_job.py:159} INFO - Task exited with return code 0
+[2022-12-04T16:13:07.285+0000] {taskinstance.py:2582} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,40 @@
+[2022-12-04T18:05:16.903+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: model_training.preprocess_data manual__2022-12-04T18:05:15.183480+00:00 [queued]>
+[2022-12-04T18:05:16.910+0000] {taskinstance.py:1087} INFO - Dependencies all met for <TaskInstance: model_training.preprocess_data manual__2022-12-04T18:05:15.183480+00:00 [queued]>
+[2022-12-04T18:05:16.911+0000] {taskinstance.py:1283} INFO - 
+--------------------------------------------------------------------------------
+[2022-12-04T18:05:16.912+0000] {taskinstance.py:1284} INFO - Starting attempt 1 of 1
+[2022-12-04T18:05:16.913+0000] {taskinstance.py:1285} INFO - 
+--------------------------------------------------------------------------------
+[2022-12-04T18:05:16.922+0000] {taskinstance.py:1304} INFO - Executing <Task(PythonOperator): preprocess_data> on 2022-12-04 18:05:15.183480+00:00
+[2022-12-04T18:05:16.931+0000] {standard_task_runner.py:55} INFO - Started process 6417 to run task
+[2022-12-04T18:05:16.935+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'model_training', 'preprocess_data', 'manual__2022-12-04T18:05:15.183480+00:00', '--job-id', '83', '--raw', '--subdir', 'DAGS_FOLDER/train_model.py', '--cfg-path', '/tmp/tmpdwvys6nk']
+[2022-12-04T18:05:16.938+0000] {standard_task_runner.py:83} INFO - Job 83: Subtask preprocess_data
+[2022-12-04T18:05:17.015+0000] {task_command.py:389} INFO - Running <TaskInstance: model_training.preprocess_data manual__2022-12-04T18:05:15.183480+00:00 [running]> on host c7dedbf79ea9
+[2022-12-04T18:05:17.070+0000] {taskinstance.py:1513} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=model_training
+AIRFLOW_CTX_TASK_ID=preprocess_data
+AIRFLOW_CTX_EXECUTION_DATE=2022-12-04T18:05:15.183480+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2022-12-04T18:05:15.183480+00:00
+[2022-12-04T18:05:17.187+0000] {taskinstance.py:1772} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/train_model.py", line 43, in _prepare_data
+    normed_data.to_csv(path_to_preprocessed, index=False)
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/core/generic.py", line 3482, in to_csv
+    storage_options=storage_options,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/formats/format.py", line 1105, in to_csv
+    csv_formatter.save()
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/formats/csvs.py", line 243, in save
+    storage_options=self.storage_options,
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/io/common.py", line 707, in get_handle
+    newline="",
+NotADirectoryError: [Errno 20] Not a directory: 'data/raw/2022-12-04/data.csv/train_data.csv'
+[2022-12-04T18:05:17.202+0000] {taskinstance.py:1327} INFO - Marking task as FAILED. dag_id=model_training, task_id=preprocess_data, execution_date=20221204T180515, start_date=20221204T180516, end_date=20221204T180517
+[2022-12-04T18:05:17.212+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 83 for task preprocess_data ([Errno 20] Not a directory: 'data/raw/2022-12-04/data.csv/train_data.csv'; 6417)
+[2022-12-04T18:05:17.268+0000] {local_task_job.py:159} INFO - Task exited with return code 1
+[2022-12-04T18:05:17.292+0000] {taskinstance.py:2582} INFO - 0 downstream tasks scheduled from follow-on schedule check
