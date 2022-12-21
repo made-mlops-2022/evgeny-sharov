@@ -29,7 +29,7 @@ def load_model(path_to_model: str = '../models/logreg.pickle') -> LogisticRegres
     return logreg_model
 
 
-def predict(data: List[List[str]], features: List[str], model: LogisticRegression):
+def predict(data: List[List[str]], features: List[str], model: LogisticRegression) -> list[float]:
     """Function to predict data using Logistic Regression model"""
     logger.info("Started prediction")
     data = pd.DataFrame(data, columns=features)
@@ -79,5 +79,6 @@ def check_model():
 
 if __name__ == '__main__':
     uvicorn.run("app:app", host="0.0.0.0", port=os.getenv("PORT", 8000))
+
 
 
